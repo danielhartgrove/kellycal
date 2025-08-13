@@ -1,29 +1,62 @@
 <?php
+// login.php - Handles user login
+
+// Start the session to track logged-in users
 session_start();
 
-$pdo = new PDO('mysql:host=localhost;dbname=tracker', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+try {
+    // Connect to the MySQL database using PDO
+    $pdo = new PDO('mysql:host=localhost;dbname=tracker', 'root', '', [
+        // Throw exceptions on DB errors
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
+    ]);
+} catch (PDOException $e) {
+    // Stop execution if database connection fails and show error message
+    die("Database connection failed: " . $e->getMessage());
+}
 
+// Check if the form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Ensure both fields are filled
+    if (empty($_POST['username_email']) || empty($_POST['password'])) {
+        echo "Please enter both username/email and password.";
+        exit;
+    }
+
+    // Trim whitespace and get form values
     $username_email = trim($_POST['username_email']);
     $password = $_POST['password'];
 
-    // Look up user by username OR email
+    // Prepare SQL query to find user by username OR email
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
     $stmt->execute([$username_email, $username_email]);
+    
+    // Fetch user record from database
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && password_verify($password, $user['password_hash'])) {
-        // Password matches → log in
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
+    if ($user) {
+        // If user exists, verify the entered password against hashed password
+        if (password_verify($password, $user['password_hash'])) {
+            // Password is correct → login success
 
-        // Redirect to dashboard or tracker page
-        header("Location: dashboard.php");
-        exit;
+            // Store user information in session variables
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+
+            // Regenerate session ID to prevent session fixation attacks
+            session_regenerate_id(true);
+
+            // Redirect user to dashboard page
+            header("Location: dashboard.php");
+            exit;
+        } else {
+            // Password does not match
+            echo "Incorrect password.";
+        }
     } else {
-        echo "Invalid username/email or password.";
+        // User with this username/email not found
+        echo "Username or email not found.";
     }
 }
 ?>

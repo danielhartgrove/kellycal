@@ -1,34 +1,49 @@
 <?php
-// register.php
-$pdo = new PDO('mysql:host=localhost;dbname=tracker', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+// register.php - Handles user registration
 
+try {
+    // Connect to the MySQL database using PDO
+    $pdo = new PDO('mysql:host=localhost;dbname=tracker', 'root', '', [
+        // Throw exceptions on DB errors
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
+    ]);
+} catch (PDOException $e) {
+    // Stop execution if database connection fails and show error message
+    die("Database connection failed: " . $e->getMessage());
+}
+
+// Check if the registration form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Get and trim input values from the form
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
     // Basic validation
     if (strlen($username) < 3 || strlen($password) < 6) {
+        // Username must be at least 3 chars and password at least 6
         die("Username must be at least 3 characters and password at least 6.");
     }
 
-    // Check if username/email already exists
+    // Check if the username or email already exists in the database
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
     $stmt->execute([$username, $email]);
+    
     if ($stmt->fetch()) {
+        // Found an existing user → cannot register with same username/email
         die("Username or email already taken.");
     }
 
-    // Hash password
+    // Hash the password securely before storing in database
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert user
+    // Insert the new user into the users table
     $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
     $stmt->execute([$username, $email, $passwordHash]);
 
-    // Redirect to login
+    // Redirect the user to the login page after successful registration
     header("Location: login.html");
     exit;
 }
+?>
