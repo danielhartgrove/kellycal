@@ -1,0 +1,31 @@
+:root {
+    --primary-color: #28a745;
+    --secondary-color: #218838;
+    --font-family: Arial, sans-serif;
+    --max-width: 400px;
+    --padding: 20px;
+}
+
+body {
+    font-family: var(--font-family);
+    max-width: var(--max-width);
+    margin: auto;
+    padding: var(--padding);
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--secondary-color);
+}
