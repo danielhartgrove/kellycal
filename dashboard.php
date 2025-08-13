@@ -17,7 +17,7 @@ $username = $_SESSION['username'];
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Dashboard - KellyCal</title>
+    <?php echo "<title>" . htmlspecialchars($username) . "'s Dashboard - KellyCal</title>"; ?>
     <style>
         body { font-family: Arial; max-width: 400px; margin: auto; padding: 20px; }
         input, button { width: 100%; padding: 10px; margin: 8px 0; }
@@ -28,7 +28,7 @@ $username = $_SESSION['username'];
 <body>
 
 <h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2>
-<p>You're successfully logged in.</p>
+<p>You've successfully logged in.</p>
 
 <!-- Example: simple logout button -->
 <form action="logout.php" method="post">
