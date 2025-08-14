@@ -67,5 +67,6 @@ $username = $_SESSION['username'];
             <button type="submit">Log Out</button>
         </form>
 
+        <?php include './components/footer_kc.php'; ?>
     </body>
 </html>

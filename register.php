@@ -66,5 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <p class="align-left">Already have an account? <a href="login.php">Log in here</a>.</p>
 
+<?php include './components/footer_kc.php'; ?>
+
 </body>
 </html>

@@ -78,5 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <p class="align-left">Don't have an account? <a href="register.php">Register here</a>.</p>
 
+<?php include './components/footer_kc.php'; ?>
+
 </body>
 </html>
