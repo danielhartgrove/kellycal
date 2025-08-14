@@ -47,3 +47,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - KellyCal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<?php include './components/header_kc.php'; ?>
+<h2>Create Your Account</h2>
+<form action="register.php" method="POST">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required minlength="6">
+    <button type="submit">Register</button>
+</form>
+
+<p class="align-left">Already have an account? <a href="login.html">Log in here</a>.</p>
+
+</body>
+</html>

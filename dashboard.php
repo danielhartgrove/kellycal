@@ -16,19 +16,20 @@ $username = $_SESSION['username'];
 
 <!DOCTYPE html>
 <html>
-<head>
-    <?php echo "<title>" . htmlspecialchars($username) . "'s Dashboard - KellyCal</title>"; ?>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <head>
+        <?php echo "<title>" . htmlspecialchars($username) . "'s Dashboard - KellyCal</title>"; ?>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <?php include './components/header_kc.php'; ?>
+        <h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2>
+        <p>Your tasks:</p>
 
-<h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2>
-<p>You've successfully logged in.</p>
 
-<!-- Example: simple logout button -->
-<form action="logout.php" method="post">
-    <button type="submit">Log Out</button>
-</form>
 
-</body>
+        <form action="logout.php" method="post">
+            <button type="submit">Log Out</button>
+        </form>
+
+    </body>
 </html>

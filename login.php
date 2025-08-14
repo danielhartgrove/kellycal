@@ -60,3 +60,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - KellyCal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<?php include './components/header_kc.php'; ?>
+<h2>Login</h2>
+<form action="login.php" method="POST">
+    <input type="text" name="username_email" placeholder="Username or Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Log In</button>
+</form>
+
+<p class="align-left">Don't have an account? <a href="register.php">Register here</a>.</p>
+
+</body>
+</html>
