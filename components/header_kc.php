@@ -1,3 +1,3 @@
 <header>
-    <h1>kellyCal</h1>
+    <h1><a href="dashboard.php">kellyCal</a></h1>
 </header>

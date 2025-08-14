@@ -57,7 +57,7 @@ $username = $_SESSION['username'];
                 echo "<p>Today's log exists. Log ID: $logId</p>";
             } else {
                 // Log does not exist
-                echo "<p>No log for today. <a href=\"daily_log.php\">Create Log</a></p>";
+                echo "<p>No food added today :(. <a href=\"add_food.php\">Add Food</a></p>";
             }
             ?>
 
