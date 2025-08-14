@@ -1,3 +1,3 @@
 <header>
-    <h1>KellyCal</h1>
+    <h1>kellyCal</h1>
 </header>

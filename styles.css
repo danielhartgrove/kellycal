@@ -3,16 +3,22 @@
 :root {
     --primary-color: #68B0AB;
     --secondary-color: #A3DFDB;
+    --off-white: #FAFAFA;
     --font-family: Arial, sans-serif;
     --max-width: 400px;
     --padding: 20px;
     --londrina: "Londrina Shadow", sans-serif;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 html{
-    height: 100%;
     overflow-x: hidden;
+    background-color: var(--off-white);
 }
 
 body {
@@ -20,7 +26,7 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: var(--font-family);
-    width: 100vw;
+    width: 100%;
 }
 
 header{
@@ -30,11 +36,13 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 h1 {
     font-family: var(--londrina);
     font-size: 2.5em;
+    margin: 20px 0;
 }
 
 form{
@@ -48,8 +56,9 @@ form{
 
 input, button {
     padding: 10px;
-    margin: 8px 0;
+    margin: 24px 0;
     border-radius: 16px;
+
 }
 
 input {
@@ -67,6 +76,10 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+}
+
+p {
+    margin: 24px 0;
 }
 
 button:hover {
